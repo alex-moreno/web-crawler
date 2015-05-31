@@ -61,7 +61,7 @@ class Crawler {
     $indexPreviousStage = 0;
 
     foreach ($stages as $indexCurrentStage => $stage) {
-      echo 'current Stage: ' . $indexCurrentStage;
+
       if (empty($results)) {
         // We are in the first iteration.
         $results[$indexCurrentStage] = $this->fetcher->doFetch($url, $stage['selector'], array($stage['fetch']));
@@ -73,22 +73,9 @@ class Crawler {
         // In subsequent iterations, we'll crawl the next urls found in previous stages.
         // We'll iterate through results in previous stage.
 
-//        // @todo: Move into a function to help readability: $results = fetchResultsCurrentStage();.
-//        // We initzialise again the current results with new ones.
-//        foreach ($results[$indexPreviousStage] as $result) {
-//          try {
-//            $resultsCurrentStage[$indexCurrentStage] = $this->fetcher->doFetch($result['href'], $stage['selector'], array($stage['fetch']));
-//          } catch (\Exception $ex) {
-//            // We don't mind if it does not find results.
-//            echo 'no results found. Continuing in next iteration.';
-//          }
-//        }
-
         // Once results is empty, we'll fill it again with new results found in
         // the current stage to be fed in the next one.
-//        $results = $resultsCurrentStage;
         $results = $this->fetchResultsCurrentStage($results[$indexPreviousStage], $indexCurrentStage, $stage['selector'], $stage['fetch']);
-        // @todo: Move into a function to help readability $results = fetchResultsCurrentStage();.
 
         // We store previous stage.
         $indexPreviousStage = $indexCurrentStage;
@@ -101,7 +88,6 @@ class Crawler {
     // @todo: Move into a function to help readability: $results = fetchResultsCurrentStage();.
     // We initzialise again the current results with new ones.
     foreach ($results as $result) {
-      echo 'iteration';
       try {
         $resultsCurrentStage[$indexCurrentStage] = $this->fetcher->doFetch($result['href'], $selector, array($fetch));
       } catch (\Exception $ex) {
