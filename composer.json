@@ -1,0 +1,11 @@
+{
+  "require-dev": {
+    "phpunit/phpunit": "3.7.38"
+  },
+  "require": {
+      "symfony/yaml": "2.7.*@dev",
+      "symfony/class-loader": "2.7.*@dev",
+      "fabpot/goutte": "2.0.*@dev",
+      "pear/net_url2": "2.2.0"
+  }
+}
