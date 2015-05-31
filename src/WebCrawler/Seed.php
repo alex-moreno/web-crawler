@@ -6,7 +6,7 @@
  * Time: 19:06
  */
 
-namespace Crawler;
+namespace WebCrawler;
 
 class Seed {
 

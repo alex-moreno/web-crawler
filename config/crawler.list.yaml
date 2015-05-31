@@ -1,0 +1,17 @@
+
+# Crawl stages.
+# Muchoviaje feed.
+muchoviaje:
+  url: www.muchoviaje.com
+  language: es
+  stages:
+    stage1: "//div[@id='navieras']//a"
+    stage2: "//a[@class='divItinerariolink']"
+
+# Logitravel feed.
+logitravel:
+  url: www.logitravel.com
+  language: es
+  stages:
+    stage1: "//div[@id='navieras']//a"
+    stage2: "//a[@class='divItinerariolink']"

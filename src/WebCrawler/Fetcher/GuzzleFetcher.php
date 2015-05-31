@@ -8,7 +8,7 @@
  * Time: 10:49
  */
 
-namespace Crawler\Fetcher;
+namespace WebCrawler\Fetcher;
 
 use Goutte\Client;
 use Symfony\Component\DomCrawler\Crawler;
@@ -67,7 +67,7 @@ class GuzzleFetcher implements FetcherInterface {
           // Fetch the attribute $attr.
           try {
 
-            // @TODO: Change this and accept fetchLinks or attributes/anything else.
+            // @TODO.md: Change this and accept fetchLinks or attributes/anything else.
             $newAttr = $crawler->attr($attr);
             if ($attr == 'href') {
               // We'll normalize the url.
@@ -94,7 +94,7 @@ class GuzzleFetcher implements FetcherInterface {
   /**
    * Return the Absolute url given a relative and an absolute one.
    *
-   * @TODO: decide if moving this resolver to the Base or somewhere else.
+   * @TODO.md: decide if moving this resolver to the Base or somewhere else.
    *
    * @param $relativeURL
    *  Url from which to fetch the absolute.

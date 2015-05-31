@@ -5,7 +5,7 @@
  * FetcherInterface.php
  */
 
-namespace Crawler\Fetcher;
+namespace WebCrawler\Fetcher;
 
 interface FetcherInterface {
 

@@ -6,7 +6,7 @@
  * Time: 19:18
  */
 
-namespace Crawler\Storage;
+namespace WebCrawler\Storage;
 
 interface CrawlerStorageInterface {
 

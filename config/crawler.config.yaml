@@ -1,0 +1,43 @@
+
+# Crawl stages.
+# Muchoviaje feed.
+
+#symfonyblog:
+#  url: http://www.symfony.com/blog/
+#  language: en
+#  stages:
+#    stage1: 'h2 > a'
+#
+#symfonyblog2:
+#  url: http://www.symfony.com/blog/
+#  language: en
+#  stages:
+#    stage1: '.post-content > h2 > a'
+
+
+muchoviaje:
+  url: http://www.muchoviaje.com/cruceros/CRUCEROS.ASP
+  language: es
+  stages:
+
+    stage1:
+      selector: '#navieras ul a'
+      # What attribute we want to fetch.
+      fetch: 'href'
+
+    stage2:
+      selector: ".resultados a"
+      fetch: 'href'
+
+    stage3:
+      selector: "LAST STAGE"
+      fetch: 'results'
+
+
+# Logitravel feed.
+#logitravel:
+#  url: www.logitravel.com
+#  language: es
+#  stages:
+#    stage1: "//div[@id='navieras']//a"
+#    stage2: "//a[@class='divItinerariolink']"

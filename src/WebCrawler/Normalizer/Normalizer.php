@@ -5,17 +5,19 @@
  * Time: 18:54
  */
 
+namespace WebCrawler;
+
 /**
  * Class Normalizer
  *
- * @TODO: standarize for reuse
+ * @TODO.md: standarize for reuse
  */
 class Normalizer {
 
   /**
    * Normalize arrays, so they can be merged with the content type easily.
    *
-   * @TODO: this normalizer must be universal.
+   * @TODO.md: this normalizer must be universal.
    *
    */
   public function normalizeArray($arrayNonNormalized) {
@@ -62,7 +64,7 @@ class Normalizer {
    *
    * where each group has as many elements as dates has the cruise (4 that case).
    * @todo: save the cheaper in a new field.
-   * @TODO: this normalizer must be universal
+   * @TODO.md: this normalizer must be universal
    */
   public function normalizeMuchoViaje($cruiseListNonNormalized) {
     $finalPriceList = array();

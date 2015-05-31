@@ -1,15 +1,16 @@
 <?php
 /**
- * @file Crawler
+ * @file WebCrawler
  */
 
-namespace Crawler;
+namespace WebCrawler;
 
-use Crawler\Fetcher\FetcherInterface;
-use Crawler\Parser\FeedsHandlerInterface;
-use Crawler\Storage\CrawlerStorage;
+use WebCrawler\Fetcher\FetcherInterface;
+use WebCrawler\Parser\FeedsHandlerInterface;
+use WebCrawler\Storage\CrawlerStorage;
+//use Symfony\Component\DomCrawler\WebCrawler;
 
-class Crawler {
+class WebCrawler {
 
   /** @var FeedsHandlerInterface $seedHandler */
   protected $seedHandler;
@@ -42,10 +43,51 @@ class Crawler {
 
   }
 
+
+  private function doCrawl($url, $pattern, $attrs = array()) {
+    $nodes = array();
+    $crawler = $this->client->request('GET', $url);
+
+    $filter = $crawler->filter($pattern);
+    if (iterator_count($filter) > 1) {
+
+      // iterate over filter results
+      foreach ($filter as $content) {
+        // create crawler instance for result
+        $crawler = new Crawler($content);
+
+        foreach ($attrs as $attr) {
+          // Fetch the attribute $attr.
+          try {
+
+            // @TODO.md: Change this and accept fetchLinks or attributes/anything else.
+            $newAttr = $crawler->attr($attr);
+            if ($attr == 'href') {
+              // We'll normalize the url.
+              $newAttr = $this->URLResolver($url, $newAttr);
+            }
+
+//            echo PHP_EOL . 'fetched: ' . $newAttr;
+            $nodes[][$attr] = $newAttr;
+          }
+          catch (\Exception $ex) {
+            // We don't mind if some url's are empty, we'll just continue and.
+            // let the previous level to decide.
+          }
+        }
+      }
+    }
+    else {
+      throw new \RuntimeException('Got empty result processing the dataset!');
+    }
+
+    return $nodes;
+  }
+
   /**
    * Trigger the crawl.
    */
-  public function doCrawl() {
+  public function bootCrawl() {
 
     foreach ($this->seedHandler->getSeeds() as $seed) {
       $urlSeed = $seed->getURL();
@@ -56,6 +98,8 @@ class Crawler {
     }
   }
 
+
+
   public function crawlStages($url, $stages) {
     $results = array();
     $indexPreviousStage = 0;
@@ -64,6 +108,7 @@ class Crawler {
 
       if (empty($results)) {
         // We are in the first iteration.
+        // @todo: this does too much.
         $results[$indexCurrentStage] = $this->fetcher->doFetch($url, $stage['selector'], array($stage['fetch']));
 
         // We store previous stage.

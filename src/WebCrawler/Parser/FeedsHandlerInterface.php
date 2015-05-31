@@ -1,6 +1,6 @@
 <?php
 
-namespace Crawler\Parser;
+namespace WebCrawler\Parser;
 
 
 // @todo: don't like this name. FeedsHandler?

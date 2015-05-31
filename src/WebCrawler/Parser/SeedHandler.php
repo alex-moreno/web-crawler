@@ -1,10 +1,10 @@
 <?php
 
-namespace Crawler\Parser;
+namespace WebCrawler\Parser;
 
 use Symfony\Component\Yaml\Parser;
 use Symfony\Component\Yaml\Exception\ParseException;
-use Crawler\Seed;
+use WebCrawler\Seed;
 
 // @todo: don't like this name. FeedsHandler?
 class SeedHandler implements FeedsHandlerInterface {
