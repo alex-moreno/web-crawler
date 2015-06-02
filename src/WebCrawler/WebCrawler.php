@@ -8,7 +8,7 @@ namespace WebCrawler;
 use WebCrawler\Fetcher\FetcherInterface;
 use WebCrawler\Parser\FeedsHandlerInterface;
 use WebCrawler\Storage\CrawlerStorage;
-//use Symfony\Component\DomCrawler\WebCrawler;
+use Symfony\Component\DomCrawler\Crawler;
 
 class WebCrawler {
 
@@ -16,7 +16,7 @@ class WebCrawler {
   protected $seedHandler;
 
   protected $storate;
-  /** @var \Crawler\Fetcher\FetcherInterface Fetcher engine */
+  /** @var \WebCrawler\Fetcher\FetcherInterface Fetcher engine */
   protected $fetcher;
 
   /**
@@ -26,10 +26,8 @@ class WebCrawler {
    *   Class with all the seeds to search.
    * @param FetcherInterface $fetcher
    *   Fetcher to use for crawling
-   * @param CrawlerStorage $storage
-   *   Storage class.
    */
-  public function __construct(FeedsHandlerInterface $seed, FetcherInterface $fetcher, CrawlerStorage $storage = NULL) {
+  public function __construct(FeedsHandlerInterface $seed, FetcherInterface $fetcher) {
 
     $this->seedHandler = $seed;
     $this->fetcher = $fetcher;
@@ -44,6 +42,20 @@ class WebCrawler {
   }
 
 
+  /**
+   * Fetch the $attrs in the $url based on the $pattern.
+   *
+   * @param $url
+   *   URL to Fetch.
+   * @param $pattern
+   *   Patter to fetch.
+   * @param array $attrs
+   *   Attributes to fetch.
+   *
+   * @return array|string
+   *   Return the array of results found.
+   * @throws \RuntimeException
+   */
   private function doCrawl($url, $pattern, $attrs = array()) {
     $nodes = array();
     $crawler = $this->client->request('GET', $url);
@@ -67,10 +79,8 @@ class WebCrawler {
               $newAttr = $this->URLResolver($url, $newAttr);
             }
 
-//            echo PHP_EOL . 'fetched: ' . $newAttr;
             $nodes[][$attr] = $newAttr;
-          }
-          catch (\Exception $ex) {
+          } catch (\Exception $ex) {
             // We don't mind if some url's are empty, we'll just continue and.
             // let the previous level to decide.
           }
@@ -98,8 +108,16 @@ class WebCrawler {
     }
   }
 
-
-
+  /**
+   * Crawl based on the number of stages that the list.yaml states.
+   *
+   * @param $url
+   *   URL to fetch data from.
+   * @param $stages
+   *   List of stages to crawl, with the url to fetch and the selector and
+   *   operation (fetch, @todo add more).
+   *
+   */
   public function crawlStages($url, $stages) {
     $results = array();
     $indexPreviousStage = 0;
@@ -129,19 +147,30 @@ class WebCrawler {
     }
   }
 
-  public function fetchResultsCurrentStage($results, $indexCurrentStage, $selector, $fetch) {
-    // @todo: Move into a function to help readability: $results = fetchResultsCurrentStage();.
+  /**
+   * Fetch results for the URL's in the current stage.
+   *
+   * @param $results
+   *   Results in current iteration.
+   * @param $indexCurrentStage
+   *   Current stage number (stated in the list.yaml.
+   * @param $selector
+   *   Selector to use to fetch data.
+   * @param $op
+   *   operation to execute (
+   */
+  public function fetchResultsCurrentStage($results, $indexCurrentStage, $selector, $op) {
     // We initzialise again the current results with new ones.
     foreach ($results as $result) {
       try {
-        $resultsCurrentStage[$indexCurrentStage] = $this->fetcher->doFetch($result['href'], $selector, array($fetch));
+        $resultsCurrentStage[$indexCurrentStage] = $this->fetcher->doFetch($result['href'], $selector, array($op));
       } catch (\Exception $ex) {
-        // We don't mind if it does not find results.
+        // We don't mind if it does not find results, carry on with more URL's.
         echo 'no results found. Continuing in next iteration.';
       }
     }
 
-
+    return $resultsCurrentStage;
   }
 
 }

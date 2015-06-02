@@ -1,17 +1,20 @@
 
 # Crawl stages.
 # Muchoviaje feed.
-muchoviaje:
-  url: www.muchoviaje.com
+muchoviaje :
+  url: http://www.muchoviaje.com/cruceros/CRUCEROS.ASP
   language: es
   stages:
-    stage1: "//div[@id='navieras']//a"
-    stage2: "//a[@class='divItinerariolink']"
 
-# Logitravel feed.
-logitravel:
-  url: www.logitravel.com
-  language: es
-  stages:
-    stage1: "//div[@id='navieras']//a"
-    stage2: "//a[@class='divItinerariolink']"
+    stage1:
+      selector: '#navieras ul a'
+      # What attribute we want to fetch.
+      fetch: 'href'
+
+    stage2:
+      selector: ".resultados a"
+      fetch: 'href'
+
+    stage3:
+      selector: "LAST STAGE"
+      fetch: 'results'

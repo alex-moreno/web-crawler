@@ -17,7 +17,8 @@ use Crawler\Crawler;
 
 // Config file.
 // @TODO.md: move into a class.
-$file = __DIR__ . '/config/crawler.config.yaml';
+//$file = __DIR__ . '/config/crawler.config.yaml';
+$file = __DIR__ . '/config/crawler.list.yaml';
 $yaml = new Yaml();
 
 try {
@@ -35,5 +36,5 @@ try {
 // And trigger the crawl.
   $test->bootCrawl();
 } catch (Exception $ex) {
-  echo 'Exception found' . $ex->getMessage();
+  echo 'Exception found: ' . $ex->getMessage();
 }

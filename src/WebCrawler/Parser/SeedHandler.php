@@ -18,8 +18,13 @@ class SeedHandler implements FeedsHandlerInterface {
 
     try {
       $yaml = new Parser($file);
-      $this->storeSeeds($yaml->parse(file_get_contents($file)));
-
+      $array_contents = $yaml->parse(file_get_contents($file));
+      if (is_array($array_contents)) {
+        $this->storeSeeds($array_contents);
+      }
+      else {
+        throw new \Exception("Empty seed list");
+      }
     }
     catch (ParseException $e) {
       printf("Unable to parse the YAML string: %s", $e->getMessage());
