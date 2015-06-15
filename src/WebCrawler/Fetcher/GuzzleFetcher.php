@@ -19,8 +19,6 @@ class GuzzleFetcher implements FetcherInterface {
   /** @var \GuzzleHttp\Client $client Client to fetch the urls */
   protected $client;
 
-  protected $body = NULL;
-
   /**
    * Default constructor.
    *
@@ -34,11 +32,10 @@ class GuzzleFetcher implements FetcherInterface {
       // We'll use Gouette by default.
       $this->client = new Client();
     }
-
   }
 
   /**
-   * Fetch the $attrs in the $url based on the $pattern.
+   * Fetch the $attrs on the $url based on the given $pattern.
    *
    * @param $url
    *   URL to Fetch.
@@ -53,16 +50,19 @@ class GuzzleFetcher implements FetcherInterface {
    */
   public function doFetch($url, $pattern, $attrs = array()) {
     $nodes = array();
+    // Do the Fecth itself.
     $crawler = $this->client->request('GET', $url);
 
-    $filter = $crawler->filter($pattern);
-    if (iterator_count($filter) > 1) {
+
+    $filtered_contents = $crawler->filter($pattern);
+    if (iterator_count($filtered_contents) > 1) {
 
       // iterate over filter results
-      foreach ($filter as $content) {
+      foreach ($filtered_contents as $content) {
         // create crawler instance for result
         $crawler = new Crawler($content);
 
+        // @TODO: attrs are currently list of url's. Need to standarize
         foreach ($attrs as $attr) {
           // Fetch the attribute $attr.
           try {
@@ -73,8 +73,7 @@ class GuzzleFetcher implements FetcherInterface {
               // We'll normalize the url.
               $newAttr = $this->URLResolver($url, $newAttr);
             }
-
-//            echo PHP_EOL . 'fetched: ' . $newAttr;
+            // Attribute which we'll be returning (URL, content itself, ...).
             $nodes[][$attr] = $newAttr;
           }
           catch (\Exception $ex) {
@@ -94,8 +93,6 @@ class GuzzleFetcher implements FetcherInterface {
   /**
    * Return the Absolute url given a relative and an absolute one.
    *
-   * @TODO.md: decide if moving this resolver to the Base or somewhere else.
-   *
    * @param $relativeURL
    *  Url from which to fetch the absolute.
    * @param $absoluteURL
@@ -105,9 +102,8 @@ class GuzzleFetcher implements FetcherInterface {
    */
   public function URLResolver($absoluteURL, $relativeURL) {
     $base = new Net_URL2($absoluteURL);
-    $finalURL = $base->resolve($relativeURL);
 
-    return $finalURL->getNormalizedURL();
+    return $base->resolve($relativeURL)->getNormalizedURL();;
   }
 
 }

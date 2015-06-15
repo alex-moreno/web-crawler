@@ -14,15 +14,16 @@ class StubFetcher implements FetcherInterface {
    * {@inherit}
    */
   public function doFetch($url, $pattern) {
-    $this->stubResults($url);
+    $this->createStub($url);
   }
 
   /**
-   * Create some stubs with the results coming from the url.
+   * Create some stubs in the filesystem with the results coming from the url.
+   *
    * @param $url
    *   URL to create stubs from.
    */
-  public function stubResults($url) {
+  public function createStub($url) {
     // Get the tracking Request.
     $contents = $this->client->request('GET', $url);
 
