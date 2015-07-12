@@ -50,11 +50,13 @@ class GuzzleFetcher implements FetcherInterface {
    */
   public function doFetch($url, $pattern, $attrs = array()) {
     $nodes = array();
+
     // Do the Fecth itself.
     $crawler = $this->client->request('GET', $url);
 
-
+    // Find (filter) the contents in the url based on the pattern.
     $filtered_contents = $crawler->filter($pattern);
+
     if (iterator_count($filtered_contents) > 1) {
 
       // iterate over filter results
@@ -62,29 +64,34 @@ class GuzzleFetcher implements FetcherInterface {
         // create crawler instance for result
         $crawler = new Crawler($content);
 
-        // @TODO: attrs are currently list of url's. Need to standarize
+        // @TODO: we may have multiple attributes to fetch per each url.
         foreach ($attrs as $attr) {
+
           // Fetch the attribute $attr.
           try {
+            // Let's fetch the content based on the attribute we've passed.
+            $newAttrContent = $crawler->attr($attr);
+            $newAttrContent = $this->URLResolver($url, $newAttrContent);
 
-            // @TODO.md: Change this and accept fetchLinks or attributes/anything else.
-            $newAttr = $crawler->attr($attr);
-            if ($attr == 'href') {
-              // We'll normalize the url.
-              $newAttr = $this->URLResolver($url, $newAttr);
-            }
             // Attribute which we'll be returning (URL, content itself, ...).
-            $nodes[][$attr] = $newAttr;
+            $nodes[][$attr] = $newAttrContent;
           }
           catch (\Exception $ex) {
             // We don't mind if some url's are empty, we'll just continue and.
             // let the previous level to decide.
+            echo PHP_EOL . 'Failed in ' . $newAttrContent;
           }
         }
       }
     }
     else {
-      throw new \RuntimeException('Got empty result processing the dataset!');
+
+      // Final value which we'll store in DDBB.
+//      echo PHP_EOL . ' Final results: ' . $filtered_contents->text();
+//      echo PHP_EOL . 'url : ' . $url;
+      $nodes['result'][] = $filtered_contents->text();
+
+//      throw new \RuntimeException('Got empty result processing the dataset!');
     }
 
     return $nodes;
@@ -103,7 +110,7 @@ class GuzzleFetcher implements FetcherInterface {
   public function URLResolver($absoluteURL, $relativeURL) {
     $base = new Net_URL2($absoluteURL);
 
-    return $base->resolve($relativeURL)->getNormalizedURL();;
+    return $base->resolve($relativeURL)->getNormalizedURL();
   }
 
 }

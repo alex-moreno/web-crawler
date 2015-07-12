@@ -31,10 +31,10 @@ try {
 //  $fetcher = new \WebCrawler\Stub\StubFetcher();
 
   // Create the crawler with the chosen config.
-  $test = new \WebCrawler\WebCrawler($parser, $fetcher);
+  $crawler = new \WebCrawler\WebCrawler($parser, $fetcher);
 
 // And trigger the crawl.
-  $test->bootCrawl();
+  $crawler->bootCrawl();
 } catch (Exception $ex) {
   echo 'Exception found: ' . $ex->getMessage();
 }

@@ -47,6 +47,7 @@ class WebCrawler {
   public function bootCrawl() {
 
     foreach ($this->seedHandler->getSeeds() as $seed) {
+      /** @var Seed $seed */
       $urlSeed = $seed->getURL();
       $stages = $seed->getStages();
 
@@ -70,9 +71,11 @@ class WebCrawler {
 
     foreach ($stages as $indexCurrentStage => $stage) {
 
+      echo PHP_EOL . 'stage: ';
+      print_r($stage);
+
       if (empty($results)) {
         // We are in the first iteration.
-        // @todo: this does too much.
         $results[$indexCurrentStage] = $this->fetcher->doFetch($url, $stage['selector'], array($stage['fetch']));
 
         // We store previous stage.
@@ -80,21 +83,30 @@ class WebCrawler {
       }
       else {
         // In subsequent iterations, we'll crawl the next urls found in previous stages.
-        // We'll iterate through results in previous stage.
+        // We'll iterate through results in previous stage feeding next stages.
 
         // Once results is empty, we'll fill it again with new results found in
         // the current stage to be fed in the next one.
         $results = $this->fetchResultsCurrentStage($results[$indexPreviousStage], $indexCurrentStage, $stage['selector'], $stage['fetch']);
 
-        // We store previous stage.
+//        if (count($stages) == $indexCurrentStage) {
+//          $finalResults[] = $results;
+//        }
+
+        // We store previous stage results.
         $indexPreviousStage = $indexCurrentStage;
       }
 
+      // @todo: remove this
+      continue;
     }
+
+    print_r($results);
+
   }
 
   /**
-   * Fetch results for the URL's in the current stage.
+   * Fetch results for the URL's in $results in the current stage.
    *
    * @param $results
    *   Results in current iteration.
@@ -104,16 +116,39 @@ class WebCrawler {
    *   Selector to use to fetch data.
    * @param $op
    *   operation to execute (
+   *
+   * @return array
+   *   Results for the current stage.
    */
   public function fetchResultsCurrentStage($results, $indexCurrentStage, $selector, $op) {
+    $resultsCurrentStage = array();
+
+//    echo  PHP_EOL . 'stage: ' . $indexCurrentStage;
+
     // We initzialise again the current results with new ones.
     foreach ($results as $result) {
       try {
         $resultsCurrentStage[$indexCurrentStage] = $this->fetcher->doFetch($result['href'], $selector, array($op));
+        // If array merge?
+
+        // If last stage.
+        if($indexCurrentStage == 'stage3') {
+
+          echo 'final: ' ;
+          $resultsCurrentStage[$indexCurrentStage][] = $resultsCurrentStage[$indexCurrentStage];
+//          print_r($resultsCurrentStage[$indexCurrentStage]);
+        }
+
       } catch (\Exception $ex) {
         // We don't mind if it does not find results, carry on with more URL's.
-        echo 'no results found. Continuing in next iteration.';
+        echo PHP_EOL . 'No results found. Continuing in next iteration. Stage: ' . $indexCurrentStage . ' Selector: ' . $selector;
+        echo PHP_EOL . 'url: ' . $result['href'];
+
+//        echo PHP_EOL . 'url: ' . $result['href'];
+//        echo PHP_EOL;
       }
+      // @todo: remove this
+      continue;
     }
 
     return $resultsCurrentStage;

@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "061a85aab106aa1c93208be5911f90c1",
+    "hash": "08ca2655c745f324af6d6427aa48cdf6",
     "packages": [
         {
             "name": "fabpot/goutte",
-            "version": "dev-master",
+            "version": "v2.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfPHP/Goutte.git",
-                "reference": "357876943ab0594696e4869be7c49e0db618af38"
+                "reference": "0ad3ee6dc2d0aaa832a80041a1e09bf394e99802"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfPHP/Goutte/zipball/357876943ab0594696e4869be7c49e0db618af38",
-                "reference": "357876943ab0594696e4869be7c49e0db618af38",
+                "url": "https://api.github.com/repos/FriendsOfPHP/Goutte/zipball/0ad3ee6dc2d0aaa832a80041a1e09bf394e99802",
+                "reference": "0ad3ee6dc2d0aaa832a80041a1e09bf394e99802",
                 "shasum": ""
             },
             "require": {
@@ -53,7 +53,7 @@
             "keywords": [
                 "scraper"
             ],
-            "time": "2015-05-21 14:43:53"
+            "time": "2015-05-05 21:14:57"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -277,16 +277,16 @@
         },
         {
             "name": "react/promise",
-            "version": "v2.2.0",
+            "version": "v2.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/reactphp/promise.git",
-                "reference": "365fcee430dfa4ace1fbc75737ca60ceea7eeeef"
+                "reference": "3b6fca09c7d56321057fa8867c8dbe1abf648627"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/reactphp/promise/zipball/365fcee430dfa4ace1fbc75737ca60ceea7eeeef",
-                "reference": "365fcee430dfa4ace1fbc75737ca60ceea7eeeef",
+                "url": "https://api.github.com/repos/reactphp/promise/zipball/3b6fca09c7d56321057fa8867c8dbe1abf648627",
+                "reference": "3b6fca09c7d56321057fa8867c8dbe1abf648627",
                 "shasum": ""
             },
             "require": {
@@ -313,24 +313,24 @@
             "authors": [
                 {
                     "name": "Jan Sorgalla",
-                    "email": "jsorgalla@googlemail.com"
+                    "email": "jsorgalla@gmail.com"
                 }
             ],
             "description": "A lightweight implementation of CommonJS Promises/A for PHP",
-            "time": "2014-12-30 13:32:42"
+            "time": "2015-07-03 13:48:55"
         },
         {
             "name": "symfony/browser-kit",
-            "version": "v2.7.0",
+            "version": "v2.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/BrowserKit.git",
-                "reference": "70cdc18dd601a486a8cc69ee26367cbaedd60400"
+                "reference": "d0a144a1a96d5dc90bed2814b2096a1322761672"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/BrowserKit/zipball/70cdc18dd601a486a8cc69ee26367cbaedd60400",
-                "reference": "70cdc18dd601a486a8cc69ee26367cbaedd60400",
+                "url": "https://api.github.com/repos/symfony/BrowserKit/zipball/d0a144a1a96d5dc90bed2814b2096a1322761672",
+                "reference": "d0a144a1a96d5dc90bed2814b2096a1322761672",
                 "shasum": ""
             },
             "require": {
@@ -372,7 +372,7 @@
             ],
             "description": "Symfony BrowserKit Component",
             "homepage": "https://symfony.com",
-            "time": "2015-05-02 15:21:08"
+            "time": "2015-06-04 20:11:48"
         },
         {
             "name": "symfony/class-loader",
@@ -380,12 +380,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ClassLoader.git",
-                "reference": "fa19598cb708b92d983b34aae313f57c217f9386"
+                "reference": "2fccbc544997340808801a7410cdcb96dd12edc4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ClassLoader/zipball/fa19598cb708b92d983b34aae313f57c217f9386",
-                "reference": "fa19598cb708b92d983b34aae313f57c217f9386",
+                "url": "https://api.github.com/repos/symfony/ClassLoader/zipball/2fccbc544997340808801a7410cdcb96dd12edc4",
+                "reference": "2fccbc544997340808801a7410cdcb96dd12edc4",
                 "shasum": ""
             },
             "require": {
@@ -422,11 +422,11 @@
             ],
             "description": "Symfony ClassLoader Component",
             "homepage": "https://symfony.com",
-            "time": "2015-05-15 13:33:16"
+            "time": "2015-06-25 12:52:11"
         },
         {
             "name": "symfony/css-selector",
-            "version": "v2.7.0",
+            "version": "v2.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/CssSelector.git",
@@ -479,7 +479,7 @@
         },
         {
             "name": "symfony/dom-crawler",
-            "version": "v2.7.0",
+            "version": "v2.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/DomCrawler.git",
@@ -536,12 +536,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Yaml.git",
-                "reference": "4a29a5248aed4fb45f626a7bbbd330291492f5c3"
+                "reference": "4bfbe0ed3909bfddd75b70c094391ec1f142f860"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Yaml/zipball/4a29a5248aed4fb45f626a7bbbd330291492f5c3",
-                "reference": "4a29a5248aed4fb45f626a7bbbd330291492f5c3",
+                "url": "https://api.github.com/repos/symfony/Yaml/zipball/4bfbe0ed3909bfddd75b70c094391ec1f142f860",
+                "reference": "4bfbe0ed3909bfddd75b70c094391ec1f142f860",
                 "shasum": ""
             },
             "require": {
@@ -577,7 +577,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2015-05-02 15:21:08"
+            "time": "2015-07-01 11:25:50"
         }
     ],
     "packages-dev": [
@@ -691,16 +691,16 @@
         },
         {
             "name": "phpunit/php-text-template",
-            "version": "1.2.0",
+            "version": "1.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-text-template.git",
-                "reference": "206dfefc0ffe9cebf65c413e3d0e809c82fbf00a"
+                "reference": "31f8b717e51d9a2afca6c9f046f5d69fc27c8686"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-text-template/zipball/206dfefc0ffe9cebf65c413e3d0e809c82fbf00a",
-                "reference": "206dfefc0ffe9cebf65c413e3d0e809c82fbf00a",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-text-template/zipball/31f8b717e51d9a2afca6c9f046f5d69fc27c8686",
+                "reference": "31f8b717e51d9a2afca6c9f046f5d69fc27c8686",
                 "shasum": ""
             },
             "require": {
@@ -709,20 +709,17 @@
             "type": "library",
             "autoload": {
                 "classmap": [
-                    "Text/"
+                    "src/"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
-            "include-path": [
-                ""
-            ],
             "license": [
                 "BSD-3-Clause"
             ],
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "email": "sb@sebastian-bergmann.de",
+                    "email": "sebastian@phpunit.de",
                     "role": "lead"
                 }
             ],
@@ -731,20 +728,20 @@
             "keywords": [
                 "template"
             ],
-            "time": "2014-01-30 17:20:04"
+            "time": "2015-06-21 13:50:34"
         },
         {
             "name": "phpunit/php-timer",
-            "version": "1.0.5",
+            "version": "1.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-timer.git",
-                "reference": "19689d4354b295ee3d8c54b4f42c3efb69cbc17c"
+                "reference": "83fe1bdc5d47658b727595c14da140da92b3d66d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-timer/zipball/19689d4354b295ee3d8c54b4f42c3efb69cbc17c",
-                "reference": "19689d4354b295ee3d8c54b4f42c3efb69cbc17c",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-timer/zipball/83fe1bdc5d47658b727595c14da140da92b3d66d",
+                "reference": "83fe1bdc5d47658b727595c14da140da92b3d66d",
                 "shasum": ""
             },
             "require": {
@@ -753,13 +750,10 @@
             "type": "library",
             "autoload": {
                 "classmap": [
-                    "PHP/"
+                    "src/"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
-            "include-path": [
-                ""
-            ],
             "license": [
                 "BSD-3-Clause"
             ],
@@ -775,7 +769,7 @@
             "keywords": [
                 "timer"
             ],
-            "time": "2013-08-02 07:42:54"
+            "time": "2015-06-13 07:35:30"
         },
         {
             "name": "phpunit/php-token-stream",
@@ -954,8 +948,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "symfony/yaml": 20,
-        "symfony/class-loader": 20,
-        "fabpot/goutte": 20
+        "symfony/class-loader": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

@@ -12,9 +12,9 @@ muchoviaje :
       fetch: 'href'
 
     stage2:
-      selector: ".resultados a"
+      selector: ".divItinerariolink"
       fetch: 'href'
 
     stage3:
-      selector: "LAST STAGE"
+      selector: ".precioDetalles"
       fetch: 'results'

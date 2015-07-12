@@ -1,0 +1,7 @@
+
+stage: Array
+(
+    [selector] => #navieras ul a
+    [fetch] => href
+)
+Exception found: cURL error 6: Couldn't resolve host 'www.muchoviaje.com'

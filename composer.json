@@ -5,7 +5,7 @@
   "require": {
       "symfony/yaml": "2.7.*@dev",
       "symfony/class-loader": "2.7.*@dev",
-      "fabpot/goutte": "2.0.*@dev",
-      "pear/net_url2": "2.2.0"
+      "pear/net_url2": "2.2.0",
+      "fabpot/goutte": "2.0.4"
   }
 }
