@@ -32,6 +32,8 @@ class WebCrawler {
     $this->seedHandler = $seed;
     $this->fetcher = $fetcher;
 
+    // @TODO: cache.
+
     if (!empty($storage)) {
       $this->storate = $storage;
     }
@@ -87,17 +89,15 @@ class WebCrawler {
 
         // Once results is empty, we'll fill it again with new results found in
         // the current stage to be fed in the next one.
-        $results = $this->fetchResultsCurrentStage($results[$indexPreviousStage], $indexCurrentStage, $stage['selector'], $stage['fetch']);
+        $lastStage = count($stages) == $indexCurrentStage;
+        $results = $this->fetchResultsCurrentStage($results[$indexPreviousStage], $indexCurrentStage, $stage['selector'], $stage['fetch'], $lastStage);
 
-//        if (count($stages) == $indexCurrentStage) {
-//          $finalResults[] = $results;
-//        }
 
         // We store previous stage results.
         $indexPreviousStage = $indexCurrentStage;
       }
 
-      // @todo: remove this
+      // @todo: remove debug
       continue;
     }
 
@@ -115,15 +115,15 @@ class WebCrawler {
    * @param $selector
    *   Selector to use to fetch data.
    * @param $op
-   *   operation to execute (
+   *   Operation to execute.
+   * @param $lastStage
+   *   Are in the last stage.
    *
    * @return array
    *   Results for the current stage.
    */
-  public function fetchResultsCurrentStage($results, $indexCurrentStage, $selector, $op) {
+  public function fetchResultsCurrentStage($results, $indexCurrentStage, $selector, $op, $lastStage = FALSE) {
     $resultsCurrentStage = array();
-
-//    echo  PHP_EOL . 'stage: ' . $indexCurrentStage;
 
     // We initzialise again the current results with new ones.
     foreach ($results as $result) {
@@ -133,10 +133,7 @@ class WebCrawler {
 
         // If last stage.
         if($indexCurrentStage == 'stage3') {
-
-          echo 'final: ' ;
-          $resultsCurrentStage[$indexCurrentStage][] = $resultsCurrentStage[$indexCurrentStage];
-//          print_r($resultsCurrentStage[$indexCurrentStage]);
+          $resultsCurrentStage['finalresults'][] = $resultsCurrentStage[$indexCurrentStage];
         }
 
       } catch (\Exception $ex) {
@@ -144,10 +141,9 @@ class WebCrawler {
         echo PHP_EOL . 'No results found. Continuing in next iteration. Stage: ' . $indexCurrentStage . ' Selector: ' . $selector;
         echo PHP_EOL . 'url: ' . $result['href'];
 
-//        echo PHP_EOL . 'url: ' . $result['href'];
-//        echo PHP_EOL;
       }
-      // @todo: remove this
+
+      // @todo: remove debug
       continue;
     }
 

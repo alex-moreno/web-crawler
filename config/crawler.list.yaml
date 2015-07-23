@@ -16,5 +16,7 @@ muchoviaje :
       fetch: 'href'
 
     stage3:
+      # TODO: Multiple selectors?
       selector: ".precioDetalles"
       fetch: 'results'
+

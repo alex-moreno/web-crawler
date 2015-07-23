@@ -42,7 +42,7 @@ class GuzzleFetcher implements FetcherInterface {
    * @param $pattern
    *   Patter to fetch.
    * @param array $attrs
-   *   Attributes to fetch.
+   *   Attributes to fetch (we can fetch several in each url).
    *
    * @return array|string
    *   Return the array of results found.
@@ -51,12 +51,17 @@ class GuzzleFetcher implements FetcherInterface {
   public function doFetch($url, $pattern, $attrs = array()) {
     $nodes = array();
 
+    // @TODO: find if there is a cache hit.
+
     // Do the Fecth itself.
     $crawler = $this->client->request('GET', $url);
+
+    echo 'got url';
 
     // Find (filter) the contents in the url based on the pattern.
     $filtered_contents = $crawler->filter($pattern);
 
+    // @todo: if attr != last stage.
     if (iterator_count($filtered_contents) > 1) {
 
       // iterate over filter results
@@ -84,14 +89,16 @@ class GuzzleFetcher implements FetcherInterface {
         }
       }
     }
+    // @todo: if attr == last stage.
     else {
 
       // Final value which we'll store in DDBB.
 //      echo PHP_EOL . ' Final results: ' . $filtered_contents->text();
 //      echo PHP_EOL . 'url : ' . $url;
-      $nodes['result'][] = $filtered_contents->text();
+      // TODO: We need to store several values, like price, texts, ...
+      echo PHP_EOL . 'attr: ' . $attrs[0];
+      $nodes['result'][]['price'] = $filtered_contents->text();
 
-//      throw new \RuntimeException('Got empty result processing the dataset!');
     }
 
     return $nodes;
