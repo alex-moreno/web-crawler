@@ -5,8 +5,10 @@ muchoviaje :
   url: http://www.muchoviaje.com/cruceros/CRUCEROS.ASP
   language: es
   # we'll add as new links
-  crawl: '#navieras ul a'
-  target: ".precioDetalles"
+  newurlsPattern:
+    newurls1: "#navieras ul a"
+    newurls2: ".divItinerariolink"
+  targetPattern: ".precioDetalles"
 
 #  stages:
 #

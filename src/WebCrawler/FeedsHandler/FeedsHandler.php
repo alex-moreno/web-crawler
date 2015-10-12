@@ -1,13 +1,12 @@
 <?php
 
-namespace WebCrawler\Parser;
+namespace WebCrawler\FeedsHandler;
 
 use Symfony\Component\Yaml\Parser;
 use Symfony\Component\Yaml\Exception\ParseException;
-use WebCrawler\Seed;
+use WebCrawler\Seeds\Seed;
 
-// @todo: don't like this name. FeedsHandler?
-class SeedHandler implements FeedsHandlerInterface {
+class FeedsHandler implements FeedsHandlerInterface {
 
   protected $seeds;
 
@@ -52,7 +51,6 @@ class SeedHandler implements FeedsHandlerInterface {
    * @return array
    */
   public function getSeeds() {
-
     return $this->seeds;
   }
 
@@ -65,4 +63,5 @@ class SeedHandler implements FeedsHandlerInterface {
   public function getNumberOfFeeds() {
     return count($this->seeds);
   }
+
 }

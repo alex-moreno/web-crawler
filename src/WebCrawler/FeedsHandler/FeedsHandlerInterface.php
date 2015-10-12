@@ -1,9 +1,11 @@
 <?php
 
-namespace WebCrawler\Parser;
+namespace WebCrawler\FeedsHandler;
 
 
 // @todo: don't like this name. FeedsHandler?
+use WebCrawler\Seeds\Seed;
+
 interface FeedsHandlerInterface {
 
   /**
@@ -17,7 +19,7 @@ interface FeedsHandlerInterface {
   /**
    * Get seeds used to crawl.
    *
-   * @return array
+   * @return Seed
    */
   public function getSeeds();
 

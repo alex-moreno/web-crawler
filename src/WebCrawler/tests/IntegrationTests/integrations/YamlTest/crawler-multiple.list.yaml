@@ -1,0 +1,20 @@
+
+# Muchoviaje training feed.
+muchoviaje :
+  url: http://www.muchoviaje.com/cruceros/CRUCEROS.ASP
+  language: es
+  # we'll add as new links
+  newurlsPattern:
+    newurls1: "#navieras ul a"
+    newurls2: ".divItinerariolink"
+  targetPattern: ".precioDetalles"
+
+# Logitravel training feed.
+logitravel :
+  url: http://www.logit.com
+  language: es
+  # we'll add as new links
+  newurls:
+    newurls1: "#navieras ul a"
+  target: ".precioDetalles"
+

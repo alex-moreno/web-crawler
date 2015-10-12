@@ -12,8 +12,6 @@ $loader->addPrefix('WebCrawler\\', __DIR__ . '/src/WebCrawler');
 $loader->register();
 
 use Symfony\Component\Yaml\Yaml;
-use Crawler\Parser\SeedHandler;
-use Crawler\Crawler;
 
 // Config file.
 // @TODO.md: move into a class.
@@ -22,7 +20,7 @@ $file = __DIR__ . '/config/crawler.list.yaml';
 $yaml = new Yaml();
 
 try {
-  $parser = new \WebCrawler\Parser\SeedHandler($file);
+  $seed = new \WebCrawler\FeedsHandler\FeedsHandler($file);
 
   // Use Guzzle.
   $fetcher = new \WebCrawler\Fetcher\GuzzleFetcher();
@@ -31,7 +29,7 @@ try {
 //  $fetcher = new \WebCrawler\Stub\StubFetcher();
 
   // Create the crawler with the chosen config.
-  $crawler = new \WebCrawler\WebCrawler($parser, $fetcher);
+  $crawler = new \WebCrawler\WebCrawler($seed, $fetcher);
 
 // And trigger the crawl.
   $crawler->bootCrawl();
