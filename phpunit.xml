@@ -1,0 +1,8 @@
+<phpunit colors="true" bootstrap="src/WebCrawler/tests/bootstrap.php">
+    <testsuites>
+        <testsuite name="WebCrawler Unit Test Suite">
+            <directory>src/WebCrawler/tests/</directory>
+            <directory>src/WebCrawler/tests/IntegrationTests/integrations/</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>
