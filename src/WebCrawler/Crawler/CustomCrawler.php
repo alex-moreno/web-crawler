@@ -17,7 +17,7 @@ use WebCrawler\Seeds\Seed;
 class CustomCrawler {
 
   protected $newURLPattern;
-  protected $targetPattern;
+  protected $newTargetPattern;
 
   /** @var  Crawler $newURLs */
   protected $newURLs;
@@ -37,7 +37,7 @@ class CustomCrawler {
    * @param $targetPattern
    *   Pattern to find the target.
    */
-  public function __construct($url, $newURLPattern, $targetPattern, FetcherInterface $fetcher = NULL) {
+  public function __construct($url, $newURLPattern, $newTargetPattern, FetcherInterface $fetcher = NULL) {
     if (empty($fetcher)) {
       $this->fetcher = new GuzzleFetcher();
     }
@@ -47,7 +47,7 @@ class CustomCrawler {
 
     $this->url = $url;
     $this->newURLPattern = $newURLPattern;
-    $this->targetPattern = $targetPattern;
+    $this->newTargetPattern = $newTargetPattern;
 
     $this->crawl();
   }
@@ -57,12 +57,16 @@ class CustomCrawler {
    */
   public function crawl() {
     // @TODO: move to get methods.
+
+    // @TODO: Add more than one pattern
     $this->newURLs = $this->fetcher->doFetch($this->url, $this->newURLPattern);
-    $this->target = $this->fetcher->doFetch($this->url, $this->targetPattern);
+
+    // @TODO: Add more than one pattern
+    $this->target = $this->fetcher->doFetch($this->url, $this->newTargetPattern);
   }
 
   /**
-   * Return all new URL that the
+   * Return all new URL that the page can have based on the given $this->newURLPattern.
    *
    * @return array
    *   Array of string containing new urls found with potential targets.
@@ -84,27 +88,22 @@ class CustomCrawler {
   }
 
   /**
-   * Return target if any found.
+   * Return all targets if any found based on the given $this->newTargetPattern.
    *
-   * @return array|Target
+   * @return array
+   *   New targets found.
    */
   public function getTarget() {
     // @TODO: cache this result.
-    $elemsFound = NULL;
+    $elemsFound = array();
 
-    echo 'testing targets';
     /** @var \DOMElement $domElement */
     foreach ($this->target as $domElement) {
       // Attribute for targets must be different and multiple.
-      $elemsFound[] = $domElement->getAttribute('href');
+      $elemsFound[] = $domElement->textContent;
     }
 
-    if ($elemsFound) {
-      // TODO: Create class Target?
-      return $this->target;
-    }
-
-    return FALSE;
+    return $elemsFound;
   }
 
 }

@@ -55,7 +55,6 @@ class GuzzleFetcher implements FetcherInterface {
 
     /** @var Crawler $client */
     $crawler = $this->client->request('GET', $url);
-    echo 'pattern:  ' . $pattern . PHP_EOL;
 
     // Find (filter) the contents in the url based on the pattern.
     /** @var Crawler $foundContents */
